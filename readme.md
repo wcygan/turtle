@@ -46,3 +46,11 @@ The program options that can be used:
 - [image](https://docs.rs/image) to create images
 - [rand](https://docs.rs/rand) to generate pseudorandom numbers
 - [rayon](https://docs.rs/rayon/1.5.0/rayon/) to parallelize execution
+
+## Output Examples
+
+### Square
+```console
+$ turtle --size 200 --name foo --pattern square --rng 99995
+```
+![alt text](examples/foo.png)

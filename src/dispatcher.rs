@@ -5,9 +5,7 @@ use image::RgbImage;
 pub fn dispatch(mut args: Arguments) {
     let img: RgbImage = match args.pattern.as_str() {
         "square" => algorithms::square::Square::create(&mut args),
-        "circle" => {
-            todo!("Circle isn't implemented yet!")
-        }
+        "circle" => algorithms::circle::Circle::create(&mut args),
         "fractal" => {
             // https://github.com/image-rs/image/blob/master/README.md#generating-fractals
             todo!("Fractal isn't implemented yet!")
