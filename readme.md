@@ -14,8 +14,13 @@ $ cargo install --git https://github.com/wcygan/turtle
 ```
 
 ### How to run
-`turtle -s <size> -n <name> -p <pattern> -r <rng>`
-
+```console
+$ turtle -s <size> -n <name> -p <pattern> -r <rng>
+```
+### Example
+```console
+$ turtle --size 200 --name foo --pattern square --rng 99995
+```
 ## Options
 
 The program options that can be used:
