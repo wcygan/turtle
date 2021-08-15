@@ -4,6 +4,7 @@
  * Author: Will Cygan, 2021
  */
 
+mod algorithms;
 mod dispatcher;
 mod arguments;
 

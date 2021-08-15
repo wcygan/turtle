@@ -10,7 +10,7 @@ $ cargo install --git https://github.com/wcygan/turtle
 ```
 
 ### How to run
-`turtle -s <size> -n <name>`
+`turtle -s <size> -n <name> -p <pattern>`
 
 ### Options
 
@@ -19,8 +19,8 @@ The program options that can be used:
 | Option      | Usage                                                           | Example            |
 | :---------- | :-------------------------------------------------------------- | :----------------- |
 | `-s`        | Determines the size of the resulting image                      | `-s 10`            |
-| `-n`        | Determiens the name of the output file                          | `-n foo`           |
-
+| `-n`        | Determines the name of the output file                          | `-n foo`           |
+| `-p`        | Determines the image pattern to use                             | `-p circle`        |
 
 
 ### Dependencies
