@@ -18,7 +18,7 @@ impl Create for Square {
         ]);
 
         let coordinates = (0..args.size)
-            .cartesian_product((0..args.size))
+            .cartesian_product(0..args.size)
             .collect::<Vec<(u32, u32)>>();
 
         let pixels: Vec<Pixel> = coordinates

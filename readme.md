@@ -51,3 +51,9 @@ The program options that can be used:
 $ turtle --size 200 --name foo --pattern square --rng 99995
 ```
 ![alt text](examples/foo.png)
+
+### Circle
+```console
+$ turtle -s 500 -n bar -p circle -r 9947
+```
+![alt text](examples/bar.png)
