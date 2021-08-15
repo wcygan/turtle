@@ -14,6 +14,7 @@ impl Create for Square {
             args.rng.gen_range(0..255),
         ]);
 
+        // TODO @wcygan: parallelize this with rayon
         image.pixels_mut().for_each(|p| *p = pixel);
 
         image
