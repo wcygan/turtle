@@ -40,7 +40,7 @@ fn main() {
             Arg::with_name("rng")
                 .short("r")
                 .long("rng")
-                .help("The seed used to initialize a pseudorandom number generator, default is 999")
+                .help("The seed used to initialize a pseudorandom number generator")
                 .default_value("999")
                 .required(false),
         )
