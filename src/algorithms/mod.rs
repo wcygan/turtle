@@ -4,6 +4,7 @@ use rand::Rng;
 use crate::arguments::Arguments;
 
 pub mod circle;
+pub mod julia_fractal;
 pub mod square;
 
 pub trait Create {
