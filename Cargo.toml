@@ -8,3 +8,5 @@ edition = "2018"
 [dependencies]
 clap = "*"
 image = "*"
+rand = "*"
+rayon = "*"

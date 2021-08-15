@@ -5,16 +5,14 @@
  */
 
 mod algorithms;
-mod dispatcher;
 mod arguments;
+mod dispatcher;
 
 use crate::dispatcher::dispatch;
 
-use clap::{App, Arg};
 use crate::arguments::Arguments;
+use clap::{App, Arg};
 
-// TODO: Use crate "image" to output files
-// TODO: Look for parts of code that could be parallelized with rayon
 fn main() {
     let matches = App::new("Turtle")
         .version("0.1")
@@ -23,10 +21,10 @@ fn main() {
         .arg(
             Arg::with_name("size")
                 .short("s")
-                .help("Length of one side of the image")
+                .help("Length of one side of the image, in pixels")
                 .min_values(1)
                 .max_values(1)
-                .required(true)
+                .required(true),
         )
         .arg(
             Arg::with_name("pattern")
@@ -34,7 +32,14 @@ fn main() {
                 .help("The pattern of the image")
                 .min_values(1)
                 .max_values(1)
-                .required(true)
+                .required(true),
+        )
+        .arg(
+            Arg::with_name("rng")
+                .short("r")
+                .help("The seed used to initialize a pseudorandom number generator, default is 999")
+                .default_value("999")
+                .required(false),
         )
         .arg(
             Arg::with_name("name")
@@ -42,7 +47,7 @@ fn main() {
                 .help("The name of the output image, e.g., <name>.png")
                 .min_values(1)
                 .max_values(1)
-                .required(true)
+                .required(true),
         )
         .get_matches();
 

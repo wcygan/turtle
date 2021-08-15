@@ -1,14 +1,16 @@
-
+use crate::algorithms::{self, *};
 use crate::arguments::Arguments;
-use crate::algorithms::{*, self};
+use image::RgbImage;
 
-pub fn dispatch(args: Arguments)  {
-    match args.pattern.as_str() {
-        "square" => {
-            algorithms::square::Square::create(args);
-        }
+pub fn dispatch(mut args: Arguments) {
+    let img: RgbImage = match args.pattern.as_str() {
+        "square" => algorithms::square::Square::create(&mut args),
         "circle" => {
-            todo!("Circle isn't implemented yet!");
+            todo!("Circle isn't implemented yet!")
+        }
+        "fractal" => {
+            // https://github.com/image-rs/image/blob/master/README.md#generating-fractals
+            todo!("Fractal isn't implemented yet!")
         }
         _ => {
             eprintln!("Please provide a valid pattern, e.g.,");
@@ -17,5 +19,8 @@ pub fn dispatch(args: Arguments)  {
             eprintln!("\nThank you! Goodbye...");
             std::process::exit(1);
         }
-    }
+    };
+
+    img.save(format!("{}.png", args.name))
+        .expect("The image failed to save...");
 }
