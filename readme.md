@@ -48,12 +48,12 @@ The program options that can be used:
 
 ### Square
 ```console
-$ turtle --size 350 --name foo --pattern square --rng 1928
+$ turtle --size 350 --name square --pattern square --rng 2121
 ```
-![alt text](examples/foo.png)
+![alt text](examples/square.png)
 
 ### Circle
 ```console
-$ turtle -s 350 -n bar -p circle -r 99479
+$ turtle -s 350 -n circle -p circle -r 99479
 ```
-![alt text](examples/bar.png)
+![alt text](examples/circle.png)
