@@ -3,7 +3,7 @@ use rand::rngs::StdRng;
 use rand::SeedableRng;
 
 pub struct Arguments {
-    pub size: u64,
+    pub size: u32,
     pub name: String,
     pub pattern: String,
     pub rng: Box<StdRng>,
@@ -15,7 +15,7 @@ impl Arguments {
             size: matches
                 .value_of("size")
                 .unwrap()
-                .parse::<u64>()
+                .parse::<u32>()
                 .expect("size must be a positive integer"),
             name: matches.value_of("name").unwrap().to_string(),
             pattern: matches.value_of("pattern").unwrap().to_string(),

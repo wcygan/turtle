@@ -42,6 +42,7 @@ The program options that can be used:
 - [image](https://docs.rs/image) to create images
 - [rand](https://docs.rs/rand) to generate pseudorandom numbers
 - [rayon](https://docs.rs/rayon/1.5.0/rayon/) to parallelize execution
+- [itertools](https://docs.rs/itertools) to create coordinate plane
 
 ## Output Examples
 
