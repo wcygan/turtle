@@ -1,6 +1,7 @@
+use image::RgbImage;
+
 use crate::algorithms::{self, *};
 use crate::arguments::Arguments;
-use image::RgbImage;
 
 pub fn dispatch(mut args: Arguments) {
     let img: RgbImage = match args.pattern.as_str() {

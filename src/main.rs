@@ -4,14 +4,14 @@
  * Author: Will Cygan, 2021
  */
 
+use clap::{App, Arg};
+
+use crate::arguments::Arguments;
+use crate::dispatcher::dispatch;
+
 mod algorithms;
 mod arguments;
 mod dispatcher;
-
-use crate::dispatcher::dispatch;
-
-use crate::arguments::Arguments;
-use clap::{App, Arg};
 
 fn main() {
     let matches = App::new("Turtle")

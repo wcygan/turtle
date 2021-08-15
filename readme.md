@@ -31,9 +31,9 @@ The program options that can be used:
 
 ### Supported patterns:
 - Square
+- Circle
 
 ### Patterns to be implemented soon:
-- Circle
 - Fractal
 - ... more complex patterns!
 
