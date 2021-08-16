@@ -26,14 +26,17 @@ fn new_image_buffer(args: &mut Arguments) -> RgbImage {
 }
 
 ///
+/// Generates a random u8
+///
+fn random_u8(args: &mut Arguments) -> u8 {
+    args.rng.gen_range(0..255) as u8
+}
+
+///
 /// Generates a random color
 ///
 fn random_color(args: &mut Arguments) -> [u8; 3] {
-    [
-        args.rng.gen_range(0..255) as u8,
-        args.rng.gen_range(0..255) as u8,
-        args.rng.gen_range(0..255) as u8,
-    ]
+    [random_u8(args), random_u8(args), random_u8(args)]
 }
 
 ///
