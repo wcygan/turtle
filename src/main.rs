@@ -53,6 +53,31 @@ fn main() {
                 .max_values(1)
                 .required(true),
         )
+        .arg(
+            Arg::with_name("x")
+                .allow_hyphen_values(true)
+                .short("x")
+                .long("complex-imaginary")
+                .help("The imaginary part of a complex number")
+                .default_value("-0.55")
+                .required(false),
+        )
+        .arg(
+            Arg::with_name("y")
+                .short("y")
+                .long("complex-real")
+                .help("The real part of a complex number")
+                .default_value("0.53")
+                .required(false),
+        )
+        .arg(
+            Arg::with_name("iterations")
+                .short("i")
+                .long("iterations")
+                .help("The number of times to executed iterated algorithms")
+                .default_value("105")
+                .required(false),
+        )
         .get_matches();
 
     /* fetch & dispatch arguments */
