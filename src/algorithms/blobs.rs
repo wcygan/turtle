@@ -13,7 +13,6 @@ impl Create for Blobs {
         let mut image = new_image_buffer(args);
         let points = random_points(args, args.size / NUMBER_OF_POINTS_LIMITER);
 
-        /* create a circle of random radius length around the randomly generated point */
         for pt in points {
             let (x, y) = (pt.0, pt.1);
             let color = random_color(args);

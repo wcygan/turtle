@@ -1,7 +1,7 @@
 # Turtle
 A Generative Art tool in Rust!
 
-<img src="examples/main.png" width="400" height="400">
+<img src="examples/julia-fractal.png" width="600" height="600">
 
 This was inspired by [Isaacg1's Programatically Generated Artwork](https://isaacg1.github.io/2018/12/06/programmatically-generated-artwork.html).
 
@@ -38,6 +38,13 @@ The program options that can be used:
 
 ## Output Examples
 
+### Mandelbrot Set
+```console
+$ turtle -n mandelbrot-fractal -p mandelbrot-fractal -s 8000 -x -0.5 -y 0.5 -i 104
+```
+<img src="examples/mandelbrot-fractal.png" width="500" height="500">
+
+
 ### Julia Set
 ```console
 $ turtle -n julia-fractal -p julia-fractal -s 3000 -x -0.55 -y 0.53 -i 105
@@ -72,15 +79,15 @@ $ turtle -s 350 -n circle -p circle -r 99479
 - Square
 - Circle
 - Blobs
-- Julia Fractal
-- Julia Weird
-
-### Upcoming patterns:
 - Mandelbrot Fractal
-- ... more complex patterns soon!
+- Julia Fractal
+- Julia Weird 
+
+... more complex patterns soon!
 
 ## Dependencies
 - [clap](https://docs.rs/clap/2.33.3/clap/) to parse commands
 - [image](https://docs.rs/image) to create images
 - [rand](https://docs.rs/rand) to generate pseudorandom numbers
 - [rayon](https://docs.rs/rayon/1.5.0/rayon/) to parallelize execution
+- [num-complex](https://docs.rs/num-complex) for complex math
