@@ -1,7 +1,6 @@
 # Turtle
 A Generative Art tool in Rust!
 
-[comment]: <> (![Julia Fractal with -x -0.59146 -y 0.5 -i 190]&#40;examples/main.png&#41;)
 <img src="examples/main.png" width="400" height="400">
 
 This was inspired by [Isaacg1's Programatically Generated Artwork](https://isaacg1.github.io/2018/12/06/programmatically-generated-artwork.html).
@@ -41,7 +40,7 @@ The program options that can be used:
 ```console
 $ turtle -n julia-fractal -p julia-fractal -s 3000 -x -0.55 -y 0.53 -i 105
 ```
-![](examples/julia-fractal.png)
+<img src="examples/julia-fractal.png" width="350" height="350">
 
 ### Square
 ```console
@@ -60,7 +59,8 @@ $ turtle -s 350 -n circle -p circle -r 99479
 - Circle
 - Julia Fractal
 
-### Patterns to be implemented soon:
+### Upcoming patterns:
+- Mandelbrot Fractal
 - ... more complex patterns soon!
 
 ## Dependencies
