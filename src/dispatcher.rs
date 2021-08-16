@@ -8,6 +8,7 @@ pub fn dispatch(mut args: Arguments) {
         "square" => algorithms::square::Square::create(&mut args),
         "circle" => algorithms::circle::Circle::create(&mut args),
         "julia-fractal" => algorithms::julia_fractal::JuliaFractal::create(&mut args),
+        "julia-weird" => algorithms::julia_fractal::JuliaFractal::weird(&mut args),
         "blobs" => algorithms::blobs::Blobs::create(&mut args),
         "mandelbrot-fractal" => {
             algorithms::mandelbrot_fractal::MandelbrotFractal::create(&mut args)
@@ -17,6 +18,7 @@ pub fn dispatch(mut args: Arguments) {
             eprintln!("\t'-p square'");
             eprintln!("\t'-p circle'");
             eprintln!("\t'-p julia-fractal'");
+            eprintln!("\t'-p julia-weird'");
             eprintln!("\t'-p mandelbrot-fractal'");
             eprintln!("\t'-p blobs'");
             eprintln!("\nThank you! Goodbye...");

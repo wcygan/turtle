@@ -42,13 +42,19 @@ The program options that can be used:
 ```console
 $ turtle -n julia-fractal -p julia-fractal -s 3000 -x -0.55 -y 0.53 -i 105
 ```
-<img src="examples/julia-fractal.png" width="350" height="350">
+<img src="examples/julia-fractal.png" width="500" height="500">
+
+### Julia Weird
+```console
+$ turtle -n julia-weird -p julia-weird -s 8000 -x -0.596 -y 0.555 -i 60
+```
+<img src="examples/julia-weird.png" width="500" height="500">
 
 ### Blobs
 ```console
 $ turtle -n blobs -p blobs -r 14415323423445943 -s 3000
 ```
-<img src="examples/blobs.png" width="350" height="350">
+<img src="examples/blobs.png" width="500" height="500">
 
 ### Square
 ```console
@@ -67,6 +73,7 @@ $ turtle -s 350 -n circle -p circle -r 99479
 - Circle
 - Blobs
 - Julia Fractal
+- Julia Weird
 
 ### Upcoming patterns:
 - Mandelbrot Fractal

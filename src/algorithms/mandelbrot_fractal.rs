@@ -12,7 +12,7 @@ impl Create for MandelbrotFractal {
         image
             .par_chunks_mut(RGB_CHUNK_SIZE)
             .enumerate()
-            .for_each(|(i, p)| {});
+            .for_each(|(i, p)| todo!());
 
         image
     }
