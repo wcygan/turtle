@@ -7,6 +7,8 @@ pub mod circle;
 pub mod julia_fractal;
 pub mod square;
 
+static RGB_CHUNK_SIZE: usize = 3;
+
 ///
 /// Creates an RbgImage
 ///
@@ -23,6 +25,13 @@ fn random_color(args: &mut Arguments) -> [u8; 3] {
         args.rng.gen_range(0..255) as u8,
         args.rng.gen_range(0..255) as u8,
     ]
+}
+
+///
+/// Generates a [u8; 3] with red, green, and blue values
+///
+fn into_rgb(r: u8, g: u8, b: u8) -> [u8; 3] {
+    [r, g, b]
 }
 
 ///
