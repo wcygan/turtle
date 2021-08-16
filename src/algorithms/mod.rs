@@ -6,6 +6,7 @@ use crate::arguments::Arguments;
 pub mod blobs;
 pub mod circle;
 pub mod julia_fractal;
+pub mod mandelbrot_fractal;
 pub mod square;
 
 static RGB_CHUNK_SIZE: usize = 3;
