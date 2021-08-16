@@ -9,7 +9,9 @@ This was inspired by [Isaacg1's Programatically Generated Artwork](https://isaac
 
 ### Installation via cargo
 
-Install on any platform using Cargo:
+Make sure you have [Rust](https://www.rust-lang.org/tools/install) and Cargo installed.
+
+Install this project on any platform using Cargo:
 
 ```console
 $ cargo install --git https://github.com/wcygan/turtle
@@ -17,7 +19,7 @@ $ cargo install --git https://github.com/wcygan/turtle
 
 ### How to run
 ```console
-$ turtle -s <size> -n <name> -p <pattern> -r <rng>
+$ turtle -s <size> -n <name> -p <pattern>
 ```
 ## Options
 
@@ -68,4 +70,3 @@ $ turtle -s 350 -n circle -p circle -r 99479
 - [image](https://docs.rs/image) to create images
 - [rand](https://docs.rs/rand) to generate pseudorandom numbers
 - [rayon](https://docs.rs/rayon/1.5.0/rayon/) to parallelize execution
-- [itertools](https://docs.rs/itertools) to create coordinate plane

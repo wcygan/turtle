@@ -7,14 +7,46 @@ pub mod circle;
 pub mod julia_fractal;
 pub mod square;
 
+///
+/// Creates an RbgImage
+///
 pub trait Create {
     fn create(args: &mut Arguments) -> RgbImage;
 }
 
-pub fn random_color(args: &mut Arguments) -> [u8; 3] {
+///
+/// Generates a random color
+///
+fn random_color(args: &mut Arguments) -> [u8; 3] {
     [
         args.rng.gen_range(0..255) as u8,
         args.rng.gen_range(0..255) as u8,
         args.rng.gen_range(0..255) as u8,
     ]
+}
+
+///
+/// Maps an index in the range 0..(length**2)
+/// to a pair (x, y) in the coordinate plane
+///
+fn index_to_coordinates(idx: u32, length: u32) -> (u32, u32) {
+    let x = idx as u32 % length;
+    let y = (idx as u32 - x) / length;
+    (x, y)
+}
+
+///
+/// Determines the point is within the circle
+///
+fn is_valid_point(x: u32, y: u32, diameter: u32) -> bool {
+    let (x, y) = (x as i64, y as i64);
+    let radius = (diameter as i64 / 2) - 1;
+    squared(radius) >= squared(radius - x) + squared(radius - y)
+}
+
+///
+/// Squares an i64
+///
+fn squared(n: i64) -> i64 {
+    n * n
 }
