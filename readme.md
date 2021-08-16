@@ -44,6 +44,12 @@ $ turtle -n julia-fractal -p julia-fractal -s 3000 -x -0.55 -y 0.53 -i 105
 ```
 <img src="examples/julia-fractal.png" width="350" height="350">
 
+### Blobs
+```console
+$ turtle -n blobs -p blobs -r 14415323423445943 -s 3000
+```
+<img src="examples/blobs.png" width="350" height="350">
+
 ### Square
 ```console
 $ turtle --size 350 --name square --pattern square --rng 2121
@@ -59,6 +65,7 @@ $ turtle -s 350 -n circle -p circle -r 99479
 ### Supported patterns:
 - Square
 - Circle
+- Blobs
 - Julia Fractal
 
 ### Upcoming patterns:

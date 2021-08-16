@@ -1,13 +1,14 @@
-use crate::algorithms::{index_to_coordinates, into_rgb, Create, RGB_CHUNK_SIZE};
-use crate::arguments::Arguments;
-use image::{ImageBuffer, Rgb, RgbImage};
+use image::RgbImage;
 use rayon::prelude::*;
+
+use crate::algorithms::{index_to_coordinates, into_rgb, new_image_buffer, Create, RGB_CHUNK_SIZE};
+use crate::arguments::Arguments;
 
 pub struct JuliaFractal {}
 
 impl Create for JuliaFractal {
     fn create(args: &mut Arguments) -> RgbImage {
-        let mut image: RgbImage = ImageBuffer::new(args.size as u32, args.size as u32);
+        let mut image = new_image_buffer(args);
 
         image
             .par_chunks_mut(RGB_CHUNK_SIZE)

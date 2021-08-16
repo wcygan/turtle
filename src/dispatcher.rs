@@ -8,11 +8,13 @@ pub fn dispatch(mut args: Arguments) {
         "square" => algorithms::square::Square::create(&mut args),
         "circle" => algorithms::circle::Circle::create(&mut args),
         "julia-fractal" => algorithms::julia_fractal::JuliaFractal::create(&mut args),
+        "blobs" => algorithms::blobs::Blobs::create(&mut args),
         _ => {
             eprintln!("Please provide a valid pattern, e.g.,");
             eprintln!("\t'-p square'");
             eprintln!("\t'-p circle'");
             eprintln!("\t'-p julia-fractal'");
+            eprintln!("\t'-p blobs'");
             eprintln!("\nThank you! Goodbye...");
             std::process::exit(1);
         }
