@@ -20,8 +20,8 @@ impl Create for MandelbrotFractal {
                 let inner_y = y as f64;
                 let inner_x = x as f64;
 
-                let mut zx = 3.0 * (inner_x - 0.5 * inner_width) / (inner_width);
-                let mut zy = 2.0 * (inner_y - 0.5 * inner_height) / (inner_height);
+                let zx = 3.0 * (inner_x - 0.5 * inner_width) / (inner_width);
+                let zy = 2.0 * (inner_y - 0.5 * inner_height) / (inner_height);
 
                 let mut i = args.iterations;
 

@@ -59,8 +59,8 @@ impl JuliaFractal {
                 let inner_y = y as f64;
                 let inner_x = x as f64;
 
-                let mut zx = 2.0 * (inner_x - 0.7 * inner_width) / (inner_width * 1.4);
-                let mut zy = 1.3 * (inner_y - 0.3 * inner_height) / (inner_height * 1.4);
+                let zx = 2.0 * (inner_x - 0.7 * inner_width) / (inner_width * 1.4);
+                let zy = 1.3 * (inner_y - 0.3 * inner_height) / (inner_height * 1.4);
 
                 let mut i = args.iterations;
 
