@@ -38,6 +38,10 @@ pub fn fill_in_circle(
         convert_if_out_of_bounds(center_y as i32 + radius as i32, h),
     );
 
+
+
+    // todo: can we parallelize this with rayon & unsafe?
+    //       can we split the chunks into subarrays and process the subarrays?
     for x in lo_x..hi_x {
         for y in lo_y..hi_y {
             if is_valid_point(x, y, center_x, center_y, radius) {

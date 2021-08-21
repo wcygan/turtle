@@ -2,12 +2,14 @@ use image::{ImageBuffer, RgbImage};
 use rand::Rng;
 
 use crate::arguments::Arguments;
+use rand::prelude::ThreadRng;
 
 pub mod blobs;
 pub mod circle;
 pub mod julia_fractal;
 pub mod mandelbrot_fractal;
 pub mod square;
+pub mod pixels;
 
 static RGB_CHUNK_SIZE: usize = 3;
 
@@ -26,17 +28,17 @@ fn new_image_buffer(args: &mut Arguments) -> RgbImage {
 }
 
 ///
-/// Generates a random u8
-///
-fn random_u8(args: &mut Arguments) -> u8 {
-    args.rng.gen_range(0..255) as u8
-}
-
-///
 /// Generates a random color
 ///
 fn random_color(args: &mut Arguments) -> [u8; 3] {
-    [random_u8(args), random_u8(args), random_u8(args)]
+    [args.rng.gen_range(0..255) as u8, args.rng.gen_range(0..255) as u8, args.rng.gen_range(0..255) as u8]
+}
+
+///
+/// Generates a random color for ThreadRng
+///
+fn thread_local_random_color(rng: &mut ThreadRng) -> [u8; 3] {
+    [rng.gen_range(0..255) as u8, rng.gen_range(0..255) as u8, rng.gen_range(0..255) as u8]
 }
 
 ///

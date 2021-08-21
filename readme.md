@@ -63,6 +63,12 @@ $ turtle -n blobs -p blobs -r 14415323423445943 -s 3000
 ```
 <img src="examples/blobs.png" width="500" height="500">
 
+### Pixels
+```console
+$ turtle -n pixels -s 2000 -p pixels
+```
+<img src="examples/pixels.png" width="500" height="500">
+
 ### Square
 ```console
 $ turtle --size 350 --name square --pattern square --rng 2121
@@ -82,6 +88,7 @@ $ turtle -s 350 -n circle -p circle -r 99479
 - Mandelbrot Fractal
 - Julia Fractal
 - Julia Weird 
+- Pixels
 
 ... more complex patterns soon!
 

@@ -5,6 +5,7 @@ use crate::arguments::Arguments;
 
 pub fn dispatch(mut args: Arguments) {
     let img: RgbImage = match args.pattern.as_str() {
+        "pixels" => algorithms::pixels::Pixels::create(&mut args),
         "square" => algorithms::square::Square::create(&mut args),
         "circle" => algorithms::circle::Circle::create(&mut args),
         "julia-fractal" => algorithms::julia_fractal::JuliaFractal::create(&mut args),
@@ -15,12 +16,13 @@ pub fn dispatch(mut args: Arguments) {
         }
         _ => {
             eprintln!("Please provide a valid pattern, e.g.,");
-            eprintln!("\t'-p square'");
-            eprintln!("\t'-p circle'");
             eprintln!("\t'-p julia-fractal'");
             eprintln!("\t'-p julia-weird'");
             eprintln!("\t'-p mandelbrot-fractal'");
             eprintln!("\t'-p blobs'");
+            eprintln!("\t'-p pixels'");
+            eprintln!("\t'-p square'");
+            eprintln!("\t'-p circle'");
             eprintln!("\nThank you! Goodbye...");
             std::process::exit(1);
         }
