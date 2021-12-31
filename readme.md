@@ -1,9 +1,12 @@
 # Turtle
+
 A Generative Art tool in Rust!
 
 <img src="examples/julia-fractal.png" width="600" height="600">
 
-This was inspired by [Isaacg1's Programatically Generated Artwork](https://isaacg1.github.io/2018/12/06/programmatically-generated-artwork.html).
+This was inspired
+by [Isaacg1's Programatically Generated Artwork](https://isaacg1.github.io/2018/12/06/programmatically-generated-artwork.html)
+.
 
 ## Build & Run
 
@@ -18,9 +21,11 @@ $ cargo install --git https://github.com/wcygan/turtle
 ```
 
 ### How to run
+
 ```console
 $ turtle -s <size> -n <name> -p <pattern>
 ```
+
 ## Options
 
 The program options that can be used:
@@ -35,64 +40,86 @@ The program options that can be used:
 | `-y`        | Real part of a complex number                                               | `-y 0.53`          |
 | `-i`        | Number of times to executed iterated algorithms                             | `-i 105`           |
 
-
 ## Output Examples
 
 ### Mandelbrot Set
+
 ```console
 $ turtle -n mandelbrot-fractal -p mandelbrot-fractal -s 8000 -x -0.5 -y 0.5 -i 104
 ```
+
 <img src="examples/mandelbrot-fractal.png" width="500" height="500">
 
-
 ### Julia Set
+
 ```console
 $ turtle -n julia-fractal -p julia-fractal -s 3000 -x -0.55 -y 0.53 -i 105
 ```
+
 <img src="examples/julia-fractal.png" width="500" height="500">
 
+### Squiggly
+
+```console
+$ turtle --pattern squiggly --name bar --size 1500
+```
+
+<img src="examples/squiggly.png" width="500" height="500">
+
 ### Julia Weird
+
 ```console
 $ turtle -n julia-weird -p julia-weird -s 8000 -x -0.596 -y 0.555 -i 60
 ```
+
 <img src="examples/julia-weird.png" width="500" height="500">
 
 ### Blobs
+
 ```console
 $ turtle -n blobs -p blobs -r 14415323423445943 -s 3000
 ```
+
 <img src="examples/blobs.png" width="500" height="500">
 
 ### Pixels
+
 ```console
 $ turtle -n pixels -s 2000 -p pixels
 ```
+
 <img src="examples/pixels.png" width="500" height="500">
 
 ### Square
+
 ```console
 $ turtle --size 350 --name square --pattern square --rng 2121
 ```
+
 ![](examples/square.png)
 
 ### Circle
+
 ```console
 $ turtle -s 350 -n circle -p circle -r 99479
 ```
+
 ![](examples/circle.png)
 
 ### Supported patterns:
+
 - Square
 - Circle
 - Blobs
 - Mandelbrot Fractal
 - Julia Fractal
-- Julia Weird 
+- Julia Weird
 - Pixels
 
 ... more complex patterns soon!
 
 ## Dependencies
+
 - [clap](https://docs.rs/clap/2.33.3/clap/) to parse commands
 - [image](https://docs.rs/image) to create images
 - [rand](https://docs.rs/rand) to generate pseudorandom numbers

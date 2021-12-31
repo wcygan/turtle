@@ -1,12 +1,14 @@
 use std::ops::Add;
 
 use cgmath::{Angle, Deg, Rad, Vector2};
-use image::RgbImage;
+use image::{Rgb, RgbImage};
 use rand::{Rng, RngCore, thread_rng};
 use rand::prelude::ThreadRng;
 
-use crate::algorithms::{convert_if_out_of_bounds, Create, new_image_buffer, point_is_in_rectangle, random_angle, random_color, random_points, xy_within_radius_from_center};
+use crate::algorithms::{convert_if_out_of_bounds, Create, move_point_one_unit, new_image_buffer, point_is_in_rectangle, random_angle, random_color, random_points, randomly_permute_angle, xy_within_radius_from_center};
 use crate::arguments::Arguments;
+
+static ANGLE_DIFFERENCE_LIMITER: u64 = 120;
 
 pub struct Squiggly {}
 
@@ -21,22 +23,29 @@ impl Create for Squiggly {
             draw_squiggly_line(&mut image, x, y, color, &mut rng)
         }
 
-        todo!("Not implemented: Squiggly");
         image
     }
 }
 
-// use: is_valid_point(x, y, center_x, center_y, radius)
-
 pub fn draw_squiggly_line(
     image: &mut RgbImage,
-    x: u32,
-    y: u32,
+    mut x: u32,
+    mut y: u32,
     color: [u8; 3],
     rng: &mut ThreadRng,
 ) {
     let (w, h) = image.dimensions();
-    let initial_angle = random_angle(rng);
+    let mut angle = random_angle(rng);
 
-    while point_is_in_rectangle(x, y, w, h) {}
+    loop {
+        if !point_is_in_rectangle(x, y, w, h) {
+            break;
+        }
+
+        image.put_pixel(x, y, Rgb(color));
+        angle = randomly_permute_angle(angle, ANGLE_DIFFERENCE_LIMITER, rng);
+        let pt = move_point_one_unit(x, y, angle);
+        x = pt.0;
+        y = pt.1;
+    }
 }
