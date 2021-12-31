@@ -266,15 +266,4 @@ mod tests {
             assert_eq!(want_y, got_y);
         }
     }
-
-    #[test]
-    fn foo() {
-        let (mut x, mut y) = (1, 2);
-
-        for i in 0..10 {
-            println!("{}, {}", x, y);
-            x += i;
-            y += i
-        }
-    }
 }
