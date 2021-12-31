@@ -1,8 +1,9 @@
+use image::{Rgb, RgbImage};
+
 use crate::algorithms::{
-    convert_if_out_of_bounds, is_valid_point, new_image_buffer, random_color, Create,
+    convert_if_out_of_bounds, Create, new_image_buffer, random_color, xy_within_radius_from_center,
 };
 use crate::arguments::Arguments;
-use image::{Rgb, RgbImage};
 
 pub struct Circle {}
 
@@ -39,12 +40,11 @@ pub fn fill_in_circle(
     );
 
 
-
     // todo: can we parallelize this with rayon & unsafe?
     //       can we split the chunks into subarrays and process the subarrays?
     for x in lo_x..hi_x {
         for y in lo_y..hi_y {
-            if is_valid_point(x, y, center_x, center_y, radius) {
+            if xy_within_radius_from_center(x, y, center_x, center_y, radius) {
                 image.put_pixel(x, y, Rgb(color));
             }
         }

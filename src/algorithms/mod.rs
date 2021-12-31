@@ -1,8 +1,12 @@
+use std::char::MAX;
+use std::ops::{Add, Sub};
+
+use cgmath::{Angle, Deg};
 use image::{ImageBuffer, RgbImage};
-use rand::Rng;
+use rand::{Rng, RngCore};
+use rand::prelude::ThreadRng;
 
 use crate::arguments::Arguments;
-use rand::prelude::ThreadRng;
 
 pub mod blobs;
 pub mod circle;
@@ -10,8 +14,10 @@ pub mod julia_fractal;
 pub mod mandelbrot_fractal;
 pub mod square;
 pub mod pixels;
+pub mod squiggly;
 
 static RGB_CHUNK_SIZE: usize = 3;
+static MAXIMUM_ANGLE: u32 = 360;
 
 ///
 /// Creates an RbgImage
@@ -68,9 +74,9 @@ fn coordinates_to_index(x: u32, y: u32, length: u32) -> u32 {
 }
 
 ///
-/// Determines the point is within the circle
+/// Determines if the point (x, y) is within the circle centered at (center_x, center_y)
 ///
-fn is_valid_point(x: u32, y: u32, center_x: u32, center_y: u32, radius: u32) -> bool {
+fn xy_within_radius_from_center(x: u32, y: u32, center_x: u32, center_y: u32, radius: u32) -> bool {
     let (x, y, center_x, center_y, radius) = (
         x as i32,
         y as i32,
@@ -131,28 +137,101 @@ fn convert_if_out_of_bounds(val: i32, max: u32) -> u32 {
     }
 }
 
+/// determines if the point (x, y) resides in the rectangle from point (0..width, 0..height)
+fn point_is_in_rectangle(x: u32, y: u32, width: u32, height: u32) -> bool {
+    let x_is_valid = (x >= 0 && x < width);
+    let y_is_valid = (y >= 0 && y < height);
+    x_is_valid && y_is_valid
+}
+
+/// Creates a random angle in the range [0, 360)
+fn random_angle(rng: &mut ThreadRng) -> Deg<f64> {
+    Deg(rng.next_u64() as f64).normalize()
+}
+
+/// Randomly permutes an angle
+fn randomly_permute_angle(angle: Deg<f64>, limiter: u64, rng: &mut ThreadRng) -> Deg<f64> {
+    let degrees_to_add = Deg((rng.next_u64() % limiter) as f64).normalize();
+    match rng.next_u64() % 2 == 0 {
+        true => {
+            angle.add(degrees_to_add).normalize()
+        }
+        false => {
+            angle.sub(degrees_to_add).normalize()
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
+    use cgmath::vec1;
+    use rand::thread_rng;
+
+    use super::*;
+
     #[test]
     fn coordinate_conversion() {
         let max = 20;
         let idx = 193;
-
-        // convert from (x, y) to index
         let (x, y) = crate::algorithms::index_to_coordinates(idx, max);
-
-        // convert from index to (x, y)
         let new_idx = crate::algorithms::coordinates_to_index(x, y, max);
-
         assert_eq!(idx, new_idx);
     }
 
     #[test]
     fn squared() {
-        let vec = [1, 2, 3, 4, 5];
-        for num in vec {
+        for num in 1..5 {
             let sq = (num * num);
-            assert_eq!(sq, crate::algorithms::squared(num));
+            assert_eq!(sq, crate::algorithms::squared(num as i32));
+        }
+    }
+
+    #[test]
+    fn random_angle_is_normalized() {
+        for i in 0..3 {
+            let angle = random_angle(&mut thread_rng());
+            let degrees = angle.0;
+            assert!(degrees < 360.0);
+            assert!(degrees >= 0.0);
+        }
+    }
+
+    #[test]
+    fn permuted_angle_is_normalized() {
+        let rng = &mut thread_rng();
+        for i in 0..3 {
+            let angle = random_angle(rng);
+            let angle = randomly_permute_angle(angle, 50, rng);
+            let degrees = angle.0;
+            assert!(degrees < 360.0);
+            assert!(degrees >= 0.0);
+        }
+    }
+
+    #[test]
+    fn image_dimensions() {
+        let (ten, twenty) = (10, 20);
+        let mut image: RgbImage = ImageBuffer::new(ten as u32, twenty as u32);
+        let (w, h) = image.dimensions();
+        assert!(w == ten && h == twenty)
+    }
+
+
+    #[test]
+    fn points_inside_rectangle() {
+        let (w, h) = (10, 10);
+        let pts = vec![(0, 0), (5, 5), (9, 9)];
+        for (x, y) in pts {
+            assert!(point_is_in_rectangle(x, y, w, h))
+        }
+    }
+
+    #[test]
+    fn points_outside_rectangle() {
+        let (w, h) = (10, 10);
+        let pts = vec![(20, 0), (5, 10), (10, 10)];
+        for (x, y) in pts {
+            assert!(!point_is_in_rectangle(x, y, w, h))
         }
     }
 }
