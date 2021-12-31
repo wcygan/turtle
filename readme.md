@@ -106,18 +106,6 @@ $ turtle -s 350 -n circle -p circle -r 99479
 
 ![](examples/circle.png)
 
-### Supported patterns:
-
-- Square
-- Circle
-- Blobs
-- Mandelbrot Fractal
-- Julia Fractal
-- Julia Weird
-- Pixels
-
-... more complex patterns soon!
-
 ## Dependencies
 
 - [clap](https://docs.rs/clap/2.33.3/clap/) to parse commands
