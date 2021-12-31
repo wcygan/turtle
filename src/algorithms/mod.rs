@@ -16,6 +16,7 @@ pub mod mandelbrot_fractal;
 pub mod square;
 pub mod pixels;
 pub mod squiggly;
+pub mod airbrush;
 
 static RGB_CHUNK_SIZE: usize = 3;
 static MAXIMUM_ANGLE: u32 = 360;
@@ -138,19 +139,25 @@ fn convert_if_out_of_bounds(val: i32, max: u32) -> u32 {
     }
 }
 
-/// determines if the point (x, y) resides in the rectangle from point (0..width, 0..height)
-fn point_is_in_rectangle(x: u32, y: u32, width: u32, height: u32) -> bool {
-    let x_is_valid = (x >= 0 && x < width);
-    let y_is_valid = (y >= 0 && y < height);
+///
+/// Determines if the point (x, y) resides in the rectangle from point (0..width, 0..height)
+///
+fn point_is_in_rectangle(x: i32, y: i32, width: u32, height: u32) -> bool {
+    let x_is_valid = (x >= 0 && x < width as i32);
+    let y_is_valid = (y >= 0 && y < height as i32);
     x_is_valid && y_is_valid
 }
 
+///
 /// Creates a random angle in the range [0, 360)
+///
 fn random_angle(rng: &mut ThreadRng) -> Deg<f64> {
-    Deg(rng.next_u64() as f64).normalize()
+    Deg((rng.next_u64() % 360) as f64)
 }
 
+///
 /// Randomly permutes an angle
+///
 fn randomly_permute_angle(angle: Deg<f64>, limiter: u64, rng: &mut ThreadRng) -> Deg<f64> {
     let degrees_to_add = Deg((rng.next_u64() % limiter) as f64).normalize();
     match rng.next_u64() % 2 == 0 {
@@ -163,13 +170,61 @@ fn randomly_permute_angle(angle: Deg<f64>, limiter: u64, rng: &mut ThreadRng) ->
     }
 }
 
+///
 /// Returns a location one unit away from (x, y) in the direction of an angle
-fn move_point_one_unit(x: u32, y: u32, angle: Deg<f64>) -> (u32, u32) {
+///
+fn move_point_one_unit(x: i32, y: i32, angle: Deg<f64>) -> (i32, i32) {
     let salt = 0.0000001; // This salt is HACK used to increase the magnitude of angles that are a multiple of 45 degrees
     let (vx, vy) = (angle.cos() * (angle.cos().abs() + salt), angle.sin() * (angle.sin().abs() + salt));
-    let x = (x as f64 + vx).round() as u32;
-    let y = (y as f64 + vy).round() as u32;
-    (x, y)
+    let x = (x as f64 + vx);
+    let y = (y as f64 + vy);
+    (x.round() as i32, y.round() as i32)
+}
+
+///
+/// Fetches a Vec of all neighboring points within "depth" distance from the starting point (x, y)
+///
+fn neighboring_points_within_depth(depth: i32, x: i32, y: i32, w: u32, h: u32) -> Vec<(i32, i32)> {
+    let mut pts = vec![];
+
+    for i in -depth..depth {
+        for j in -depth..depth {
+            if i == 0 && j == 0 {
+                continue;
+            }
+
+            let pt = (x + i, y + j);
+
+            if pt.0 < 0 || pt.1 < 0 {
+                continue;
+            }
+
+            if point_is_in_rectangle(pt.0, pt.1, w, h) {
+                pts.push((pt));
+            }
+        }
+    }
+
+    pts
+}
+
+///
+/// Prune most of the points in a collection away
+/// (3% chance of surviving the pruning step)
+///
+fn prune_points(pts: Vec<(i32, i32)>, rng: &mut ThreadRng) -> Vec<(i32, i32)> {
+    let mut selected = vec![];
+
+    for pt in pts {
+        match (rng.next_u64() % 33) == 0 {
+            true => {
+                selected.push(pt)
+            }
+            false => {}
+        }
+    }
+
+    selected
 }
 
 #[cfg(test)]
@@ -257,6 +312,7 @@ mod tests {
             (1, 1, Deg(270.0), 1, 0),
             (1, 1, Deg(315.0), 2, 0),
             (1, 1, Deg(350.0), 2, 1),
+            (150, 0, Deg(240.0), 150, 0),
         ];
 
         for test in tests {

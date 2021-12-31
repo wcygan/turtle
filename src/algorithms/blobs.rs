@@ -1,7 +1,8 @@
-use crate::algorithms::{new_image_buffer, random_color, random_points, Create};
-use crate::arguments::Arguments;
 use image::RgbImage;
 use rand::Rng;
+
+use crate::algorithms::{Create, new_image_buffer, random_color, random_points};
+use crate::arguments::Arguments;
 
 static RADIUS_LIMITER: u32 = 10;
 static NUMBER_OF_POINTS_LIMITER: u32 = 5;

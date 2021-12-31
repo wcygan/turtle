@@ -77,15 +77,21 @@ $ turtle -n julia-weird -p julia-weird -s 8000 -x -0.596 -y 0.555 -i 60
 ### Blobs
 
 ```console
-$ turtle -n blobs -p blobs -r 14415323423445943 -s 3000
+$ turtle --name blobs --pattern blobs --rng 14415323423445943 --size 3000
 ```
 
-<img src="examples/blobs.png" width="500" height="500">
+### Airbrush
+
+```console
+$ turtle --pattern airbrush --name airbrush --size 2000
+```
+
+<img src="examples/airbrush.png" width="500" height="500">
 
 ### Pixels
 
 ```console
-$ turtle -n pixels -s 2000 -p pixels
+$ turtle --name pixels --size 2000 --pattern pixels
 ```
 
 <img src="examples/pixels.png" width="500" height="500">
@@ -101,7 +107,7 @@ $ turtle --size 350 --name square --pattern square --rng 2121
 ### Circle
 
 ```console
-$ turtle -s 350 -n circle -p circle -r 99479
+$ turtle --size 350 --name circle --pattern circle --radius 99479
 ```
 
 ![](examples/circle.png)

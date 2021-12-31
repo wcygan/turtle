@@ -1,8 +1,9 @@
-use crate::algorithms::{index_to_coordinates, into_rgb, new_image_buffer, Create, RGB_CHUNK_SIZE};
-use crate::arguments::Arguments;
 use image::RgbImage;
 use num_complex::Complex64;
 use rayon::prelude::*;
+
+use crate::algorithms::{Create, index_to_coordinates, into_rgb, new_image_buffer, RGB_CHUNK_SIZE};
+use crate::arguments::Arguments;
 
 pub struct MandelbrotFractal {}
 

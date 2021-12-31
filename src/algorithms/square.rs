@@ -1,7 +1,7 @@
 use image::RgbImage;
 use rayon::prelude::*;
 
-use crate::algorithms::{new_image_buffer, random_color, Create, RGB_CHUNK_SIZE};
+use crate::algorithms::{Create, new_image_buffer, random_color, RGB_CHUNK_SIZE};
 use crate::arguments::Arguments;
 
 pub struct Square {}

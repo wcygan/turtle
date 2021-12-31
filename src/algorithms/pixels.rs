@@ -1,8 +1,9 @@
-use crate::algorithms::{Create, RGB_CHUNK_SIZE, new_image_buffer, thread_local_random_color};
-use crate::arguments::Arguments;
 use image::RgbImage;
-use rayon::prelude::*;
 use rand::thread_rng;
+use rayon::prelude::*;
+
+use crate::algorithms::{Create, new_image_buffer, RGB_CHUNK_SIZE, thread_local_random_color};
+use crate::arguments::Arguments;
 
 pub struct Pixels {}
 

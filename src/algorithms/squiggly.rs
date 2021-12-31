@@ -20,7 +20,7 @@ impl Create for Squiggly {
         let points = random_points(args, 50);
         for (x, y) in points {
             let color = random_color(args);
-            draw_squiggly_line(&mut image, x, y, color, &mut rng)
+            draw_squiggly_line(&mut image, x as i32, y as i32, color, &mut rng)
         }
 
         image
@@ -29,8 +29,8 @@ impl Create for Squiggly {
 
 pub fn draw_squiggly_line(
     image: &mut RgbImage,
-    mut x: u32,
-    mut y: u32,
+    mut x: i32,
+    mut y: i32,
     color: [u8; 3],
     rng: &mut ThreadRng,
 ) {
@@ -42,7 +42,7 @@ pub fn draw_squiggly_line(
             break;
         }
 
-        image.put_pixel(x, y, Rgb(color));
+        image.put_pixel(x as u32, y as u32, Rgb(color));
         angle = randomly_permute_angle(angle, ANGLE_DIFFERENCE_LIMITER, rng);
         let pt = move_point_one_unit(x, y, angle);
         x = pt.0;
