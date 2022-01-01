@@ -80,6 +80,8 @@ $ turtle -n julia-weird -p julia-weird -s 8000 -x -0.596 -y 0.555 -i 60
 $ turtle --name blobs --pattern blobs --rng 14415323423445943 --size 3000
 ```
 
+<img src="examples/blobs.png" width="500" height="500">
+
 ### Airbrush
 
 ```console
