@@ -34,15 +34,19 @@ pub fn draw_squiggly_line(
     color: [u8; 3],
     rng: &mut ThreadRng,
 ) {
+    let mut x = x as f64;
+    let mut y = y as f64;
     let (w, h) = image.dimensions();
     let mut angle = random_angle(rng);
 
     loop {
-        if !point_is_in_rectangle(x, y, w, h) {
+        let (rx, ry) = (x.round() as i32, y.round() as i32);
+
+        if !point_is_in_rectangle(rx, ry, w, h) {
             break;
         }
 
-        image.put_pixel(x as u32, y as u32, Rgb(color));
+        image.put_pixel(rx as u32, ry as u32, Rgb(color));
         angle = randomly_permute_angle(angle, ANGLE_DIFFERENCE_LIMITER, rng);
         let pt = move_point_one_unit(x, y, angle);
         x = pt.0;

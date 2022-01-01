@@ -173,12 +173,9 @@ fn randomly_permute_angle(angle: Deg<f64>, limiter: u64, rng: &mut ThreadRng) ->
 ///
 /// Returns a location one unit away from (x, y) in the direction of an angle
 ///
-fn move_point_one_unit(x: i32, y: i32, angle: Deg<f64>) -> (i32, i32) {
-    let salt = 0.0000001; // This salt is HACK used to increase the magnitude of angles that are a multiple of 45 degrees
-    let (vx, vy) = (angle.cos() * (angle.cos().abs() + salt), angle.sin() * (angle.sin().abs() + salt));
-    let x = (x as f64 + vx);
-    let y = (y as f64 + vy);
-    (x.round() as i32, y.round() as i32)
+fn move_point_one_unit(x: f64, y: f64, angle: Deg<f64>) -> (f64, f64) {
+    let (vx, vy) = (angle.cos() * angle.cos().abs(), angle.sin() * angle.sin().abs());
+    (x + vx, y + vy)
 }
 
 ///
@@ -296,30 +293,6 @@ mod tests {
         let pts = vec![(20, 0), (5, 10), (10, 10)];
         for (x, y) in pts {
             assert!(!point_is_in_rectangle(x, y, w, h))
-        }
-    }
-
-    #[test]
-    fn validate_move_point_one_unit() {
-        let tests = vec![
-            (1, 1, Deg(0.0), 2, 1),
-            (1, 1, Deg(30.0), 2, 1),
-            (1, 1, Deg(45.0), 2, 2),
-            (1, 1, Deg(52.5), 1, 2),
-            (1, 1, Deg(90.0), 1, 2),
-            (1, 1, Deg(180.0), 0, 1),
-            (1, 1, Deg(225.0), 0, 0),
-            (1, 1, Deg(270.0), 1, 0),
-            (1, 1, Deg(315.0), 2, 0),
-            (1, 1, Deg(350.0), 2, 1),
-            (150, 0, Deg(240.0), 150, 0),
-        ];
-
-        for test in tests {
-            let (x, y, deg, want_x, want_y) = test;
-            let (got_x, got_y) = move_point_one_unit(x, y, deg);
-            assert_eq!(want_x, got_x);
-            assert_eq!(want_y, got_y);
         }
     }
 }
