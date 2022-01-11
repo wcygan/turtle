@@ -5,6 +5,7 @@ use crate::arguments::Arguments;
 
 pub fn dispatch(mut args: Arguments) {
     let img: RgbImage = match args.pattern.as_str() {
+        "tree" => algorithms::tree::Tree::create(&mut args),
         "airbrush" => algorithms::airbrush::Airbrush::create(&mut args),
         "squiggly" => algorithms::squiggly::Squiggly::create(&mut args),
         "pixels" => algorithms::pixels::Pixels::create(&mut args),
@@ -18,6 +19,7 @@ pub fn dispatch(mut args: Arguments) {
         }
         _ => {
             eprintln!("Please provide a valid pattern, e.g.,");
+            eprintln!("\t'-p tree'");
             eprintln!("\t'-p airbrush'");
             eprintln!("\t'-p squiggly'");
             eprintln!("\t'-p julia-fractal'");

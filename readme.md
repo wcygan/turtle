@@ -90,6 +90,14 @@ $ turtle --pattern airbrush --name airbrush --size 2000
 
 <img src="examples/airbrush.png" width="500" height="500">
 
+### Tree
+
+```console
+$ turtle --size 2000 --pattern tree --rng 12 --name tree
+```
+
+<img src="examples/tree.png" width="500" height="500">
+
 ### Pixels
 
 ```console

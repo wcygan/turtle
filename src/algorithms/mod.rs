@@ -1,7 +1,7 @@
 use std::char::MAX;
 use std::ops::{Add, Sub};
 
-use cgmath::{Angle, Deg};
+use cgmath::{Angle, Deg, InnerSpace, Rad, Vector2};
 use cgmath::num_traits::abs;
 use image::{ImageBuffer, RgbImage};
 use rand::{Rng, RngCore};
@@ -17,6 +17,7 @@ pub mod square;
 pub mod pixels;
 pub mod squiggly;
 pub mod airbrush;
+pub mod tree;
 
 static RGB_CHUNK_SIZE: usize = 3;
 static MAXIMUM_ANGLE: u32 = 360;
@@ -121,6 +122,30 @@ fn random_points(args: &mut Arguments, n: u32) -> Vec<(u32, u32)> {
 }
 
 ///
+/// Fetch a point on the edge of a rectangle formed by points (0, 0) to (args.size, args.size)
+///
+fn random_edge_point(args: &mut Arguments) -> (u32, u32) {
+    let random_number = args.rng.next_u32() % args.size;
+    match args.rng.next_u64() % 4 {
+        0 => {
+            (0, random_number)
+        }
+        1 => {
+            (random_number, 0)
+        }
+        2 => {
+            (args.size, random_number)
+        }
+        3 => {
+            (random_number, args.size)
+        }
+        _ => {
+            panic!("an integer modulo 4 shouldn't result in a number other than 0, 1, 2, or 3")
+        }
+    }
+}
+
+///
 /// Converts a point that is out of bounds to the nearest border point
 ///
 fn convert_if_out_of_bounds(val: i32, max: u32) -> u32 {
@@ -156,6 +181,16 @@ fn random_angle(rng: &mut ThreadRng) -> Deg<f64> {
 }
 
 ///
+/// Gets the angle from (x1, y1) to (x2, y2)
+///
+fn angle_between_points_mirrored_y(x1: u32, y1: u32, x2: u32, y2: u32) -> Deg<f64> {
+    let v1 = Vector2::new(x1 as f64, (y1 as i32 * -1) as f64);
+    let v2 = Vector2::new(x2 as f64, (y2 as i32 * -1) as f64);
+    let rad = v1.angle(v2);
+    Deg::from(rad)
+}
+
+///
 /// Randomly permutes an angle
 ///
 fn randomly_permute_angle(angle: Deg<f64>, limiter: u64, rng: &mut ThreadRng) -> Deg<f64> {
@@ -176,6 +211,15 @@ fn randomly_permute_angle(angle: Deg<f64>, limiter: u64, rng: &mut ThreadRng) ->
 fn move_point_one_unit(x: f64, y: f64, angle: Deg<f64>) -> (f64, f64) {
     let (vx, vy) = (angle.cos() * angle.cos().abs(), angle.sin() * angle.sin().abs());
     (x + vx, y + vy)
+}
+
+///
+/// Returns a location n units away from (x, y) in the direction of an angle
+///
+fn move_point_n_units(x: f64, y: f64, n: f64, angle: Deg<f64>) -> (f64, f64) {
+    let new_x = x + (angle.cos() * n);
+    let new_y = y + (angle.sin() * n);
+    (new_x, new_y)
 }
 
 ///
