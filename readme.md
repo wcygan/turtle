@@ -98,6 +98,22 @@ $ turtle --size 2000 --pattern tree --rng 12 --name tree
 
 <img src="examples/tree.png" width="500" height="500">
 
+### Diamond
+
+```console
+$ turtle --size 1000 --name diamond --pattern diamond --rng 124331
+```
+
+<img src="examples/diamond.png" width="500" height="500">
+
+### Snowflake
+
+```console
+$ turtle --size 1000 --name snowflake --pattern snowflake --rng 12494213
+```
+
+<img src="examples/snowflake.png" width="500" height="500">
+
 ### Pixels
 
 ```console

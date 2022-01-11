@@ -18,6 +18,8 @@ pub mod pixels;
 pub mod squiggly;
 pub mod airbrush;
 pub mod tree;
+pub mod snowflake;
+pub mod diamond;
 
 static RGB_CHUNK_SIZE: usize = 3;
 static MAXIMUM_ANGLE: u32 = 360;
