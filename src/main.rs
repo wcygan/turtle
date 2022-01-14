@@ -23,9 +23,9 @@ fn main() {
                 .short("s")
                 .long("size")
                 .help("Length of one side of the image, in pixels")
-                .min_values(1)
+                .min_values(0)
                 .max_values(1)
-                .required(true),
+                .required(false),
         )
         .arg(
             Arg::with_name("pattern")
@@ -49,9 +49,9 @@ fn main() {
                 .short("n")
                 .long("name")
                 .help("The name of the output image, e.g., <name>.png")
-                .min_values(1)
+                .min_values(0)
                 .max_values(1)
-                .required(true),
+                .required(false),
         )
         .arg(
             Arg::with_name("x")

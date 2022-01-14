@@ -14,14 +14,16 @@ pub struct Arguments {
 
 impl Arguments {
     pub fn new(matches: &ArgMatches) -> Arguments {
+        let pattern = matches.value_of("pattern").unwrap();
+        let name = matches.value_of("name").unwrap_or(pattern);
+        let size = matches
+            .value_of("size")
+            .unwrap_or("1000")
+            .parse::<u32>().unwrap();
         Arguments {
-            size: matches
-                .value_of("size")
-                .unwrap()
-                .parse::<u32>()
-                .expect("size must be a positive integer"),
-            name: matches.value_of("name").unwrap().to_string(),
-            pattern: matches.value_of("pattern").unwrap().to_string(),
+            size,
+            name: name.to_string(),
+            pattern: pattern.to_string(),
             rng: Box::new(StdRng::seed_from_u64(
                 matches
                     .value_of("rng")
