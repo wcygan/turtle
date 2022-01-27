@@ -1,12 +1,12 @@
-use std::env::args;
-use std::ops::{Add, Sub};
 
-use cgmath::{Angle, Deg, Rad, Vector2};
+use std::ops::{Add};
+
+use cgmath::{Angle, Deg};
 use image::{Rgb, RgbImage};
-use rand::{Rng, RngCore, thread_rng};
-use rand::prelude::ThreadRng;
+use rand::{thread_rng};
 
-use crate::algorithms::{angle_between_points_mirrored_y, convert_if_out_of_bounds, Create, move_point_n_units, move_point_one_unit, new_image_buffer, point_is_in_rectangle, random_angle, random_color, random_edge_point, random_points, randomly_permute_angle, xy_within_radius_from_center};
+
+use crate::algorithms::{angle_between_points_mirrored_y, Create, move_point_one_unit, new_image_buffer, point_is_in_rectangle, random_color, random_edge_point};
 use crate::arguments::Arguments;
 
 pub struct Tree {}
@@ -27,7 +27,7 @@ fn draw_tree(
     edge_y: u32,
 ) {
     let (w, h) = image.dimensions();
-    let mut rng = thread_rng();
+    let _rng = thread_rng();
     let mut angle = angle_between_points_mirrored_y(edge_x, edge_y, w / 2, h / 2);
     {
         let (i, j) = move_point_one_unit(edge_x as f64, edge_y as f64, angle);
@@ -47,7 +47,7 @@ fn draw_tree(
     next_points.push((edge_x, edge_y));
 
 
-    for step in 0..steps {
+    for _step in 0..steps {
         // draw lines
         for pt in &current_points {
             let (x, y) = *pt;
@@ -92,7 +92,7 @@ fn draw_straight_line(
     color: [u8; 3],
     angle: Deg<f64>,
 ) -> (u32, u32) {
-    for i in 0..length {
+    for _i in 0..length {
         let (rx, ry) = (x.round() as i32, y.round() as i32);
         if point_is_in_rectangle(rx, ry, w, h) {
             image.put_pixel(rx as u32, ry as u32, Rgb(color));
@@ -102,5 +102,5 @@ fn draw_straight_line(
         y = pt.1;
     }
 
-    return (x.round() as u32, y.round() as u32);
+    (x.round() as u32, y.round() as u32)
 }

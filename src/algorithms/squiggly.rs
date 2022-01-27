@@ -1,11 +1,11 @@
-use std::ops::Add;
 
-use cgmath::{Angle, Deg, Rad, Vector2};
+
+
 use image::{Rgb, RgbImage};
-use rand::{Rng, RngCore, thread_rng};
+
 use rand::prelude::ThreadRng;
 
-use crate::algorithms::{convert_if_out_of_bounds, Create, move_point_one_unit, new_image_buffer, point_is_in_rectangle, random_angle, random_color, random_points, randomly_permute_angle, xy_within_radius_from_center};
+use crate::algorithms::{Create, move_point_one_unit, new_image_buffer, point_is_in_rectangle, random_angle, random_color, random_points, randomly_permute_angle};
 use crate::arguments::Arguments;
 
 static ANGLE_DIFFERENCE_LIMITER: u64 = 120;
@@ -29,8 +29,8 @@ impl Create for Squiggly {
 
 pub fn draw_squiggly_line(
     image: &mut RgbImage,
-    mut x: i32,
-    mut y: i32,
+    x: i32,
+    y: i32,
     color: [u8; 3],
     rng: &mut ThreadRng,
 ) {

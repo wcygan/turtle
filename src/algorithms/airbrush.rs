@@ -1,14 +1,11 @@
 use std::ops::Add;
 
-use cgmath::{Angle, Deg};
+use cgmath::Deg;
 use image::{Rgb, RgbImage};
 use rand::prelude::ThreadRng;
-use rand::RngCore;
 
-use crate::algorithms::{Create, move_point_one_unit, neighboring_points_within_depth, new_image_buffer, point_is_in_rectangle, prune_points, random_angle, random_color, random_points, randomly_permute_angle};
+use crate::algorithms::{Create, move_point_one_unit, neighboring_points_within_depth, new_image_buffer, point_is_in_rectangle, prune_points, random_angle, random_color, random_points};
 use crate::arguments::Arguments;
-
-static ANGLE_DIFFERENCE_LIMITER: u64 = 180;
 
 pub struct Airbrush {}
 
@@ -29,8 +26,8 @@ impl Create for Airbrush {
 
 pub fn draw_airbrushed_line(
     image: &mut RgbImage,
-    mut x: i32,
-    mut y: i32,
+    x: i32,
+    y: i32,
     color: [u8; 3],
     rng: &mut ThreadRng,
 ) {

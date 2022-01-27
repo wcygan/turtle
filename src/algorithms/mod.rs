@@ -1,8 +1,6 @@
-use std::char::MAX;
 use std::ops::{Add, Sub};
 
-use cgmath::{Angle, Deg, InnerSpace, Rad, Vector2};
-use cgmath::num_traits::abs;
+use cgmath::{Angle, Deg, InnerSpace, Vector2};
 use image::{ImageBuffer, RgbImage};
 use rand::{Rng, RngCore};
 use rand::prelude::ThreadRng;
@@ -22,7 +20,6 @@ pub mod snowflake;
 pub mod diamond;
 
 static RGB_CHUNK_SIZE: usize = 3;
-static MAXIMUM_ANGLE: u32 = 360;
 
 ///
 /// Creates an RbgImage
@@ -170,8 +167,8 @@ fn convert_if_out_of_bounds(val: i32, max: u32) -> u32 {
 /// Determines if the point (x, y) resides in the rectangle from point (0..width, 0..height)
 ///
 fn point_is_in_rectangle(x: i32, y: i32, width: u32, height: u32) -> bool {
-    let x_is_valid = (x >= 0 && x < width as i32);
-    let y_is_valid = (y >= 0 && y < height as i32);
+    let x_is_valid = x >= 0 && x < width as i32;
+    let y_is_valid = y >= 0 && y < height as i32;
     x_is_valid && y_is_valid
 }
 
@@ -216,15 +213,6 @@ fn move_point_one_unit(x: f64, y: f64, angle: Deg<f64>) -> (f64, f64) {
 }
 
 ///
-/// Returns a location n units away from (x, y) in the direction of an angle
-///
-fn move_point_n_units(x: f64, y: f64, n: f64, angle: Deg<f64>) -> (f64, f64) {
-    let new_x = x + (angle.cos() * n);
-    let new_y = y + (angle.sin() * n);
-    (new_x, new_y)
-}
-
-///
 /// Fetches a Vec of all neighboring points within "depth" distance from the starting point (x, y)
 ///
 fn neighboring_points_within_depth(depth: i32, x: i32, y: i32, w: u32, h: u32) -> Vec<(i32, i32)> {
@@ -243,7 +231,7 @@ fn neighboring_points_within_depth(depth: i32, x: i32, y: i32, w: u32, h: u32) -
             }
 
             if point_is_in_rectangle(pt.0, pt.1, w, h) {
-                pts.push((pt));
+                pts.push(pt);
             }
         }
     }
@@ -288,14 +276,14 @@ mod tests {
     #[test]
     fn squared() {
         for num in 1..5 {
-            let sq = (num * num);
+            let sq = num * num;
             assert_eq!(sq, crate::algorithms::squared(num as i32));
         }
     }
 
     #[test]
     fn random_angle_is_normalized() {
-        for i in 0..3 {
+        for _i in 0..3 {
             let angle = random_angle(&mut thread_rng());
             let degrees = angle.0;
             assert!(degrees < 360.0);
@@ -306,7 +294,7 @@ mod tests {
     #[test]
     fn permuted_angle_is_normalized() {
         let rng = &mut thread_rng();
-        for i in 0..3 {
+        for _i in 0..3 {
             let angle = random_angle(rng);
             let angle = randomly_permute_angle(angle, 50, rng);
             let degrees = angle.0;
@@ -318,7 +306,7 @@ mod tests {
     #[test]
     fn image_dimensions() {
         let (ten, twenty) = (10, 20);
-        let mut image: RgbImage = ImageBuffer::new(ten as u32, twenty as u32);
+        let image: RgbImage = ImageBuffer::new(ten as u32, twenty as u32);
         let (w, h) = image.dimensions();
         assert!(w == ten && h == twenty)
     }
