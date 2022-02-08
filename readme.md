@@ -144,4 +144,44 @@ $ turtle --size 350 --name circle --pattern circle --radius 99479
 - [image](https://docs.rs/image) to create images
 - [rand](https://docs.rs/rand) to generate pseudorandom numbers
 - [rayon](https://docs.rs/rayon/1.5.0/rayon/) to parallelize execution
-- [num-complex](https://docs.rs/num-complex) for complex math
+- [num-complex](https://docs.rs/num-complex) for complex math'
+
+## Directory Tree
+
+```
+$ tree
+.
+├── Cargo.lock
+├── Cargo.toml
+├── examples
+│   ├── airbrush.png
+│   ├── blobs.png
+│   ├── circle.png
+│   ├── diamond.png
+│   ├── julia-fractal.png
+│   ├── julia-weird.png
+│   ├── mandelbrot-fractal.png
+│   ├── pixels.png
+│   ├── snowflake.png
+│   ├── square.png
+│   ├── squiggly.png
+│   └── tree.png
+├── readme.md
+└── src
+    ├── algorithms
+    │   ├── airbrush.rs
+    │   ├── blobs.rs
+    │   ├── circle.rs
+    │   ├── diamond.rs
+    │   ├── julia_fractal.rs
+    │   ├── mandelbrot_fractal.rs
+    │   ├── mod.rs
+    │   ├── pixels.rs
+    │   ├── snowflake.rs
+    │   ├── square.rs
+    │   ├── squiggly.rs
+    │   └── tree.rs
+    ├── arguments.rs
+    ├── dispatcher.rs
+    └── main.rs
+```
